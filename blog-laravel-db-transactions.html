@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laravel DB Transactions | Mostafa Mahmoud</title>
+    <meta name="description" content="Details for a Laravel article about database transactions, transaction boundaries, failure handling, and maintainable backend design." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0f12" />
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header" id="top">
+      <div class="container nav-shell">
+        <a class="brand" href="index.html#top" aria-label="Go to home"><span class="brand-mark" aria-hidden="true"><img src="favicon.svg" alt="" width="40" height="40" decoding="async" /></span><span data-profile-role>Backend Developer</span></a>
+        <nav aria-label="Primary">
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle><span class="sr-only">Toggle navigation</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7H20M4 12H20M4 17H20" stroke-linecap="round" /></svg></button>
+          <div class="nav-menu" id="site-menu" data-nav-menu>
+            <ul class="nav-links" role="list"><li><a href="index.html#about">About</a></li><li><a href="index.html#skills">Skills</a></li><li><a href="index.html#journey">Journey</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="projects.html">Projects</a></li><li><a class="active" href="blogs.html">Blog</a></li></ul>
+            <a class="btn btn-primary mobile-menu-cta" href="mailto:mostafaa.mahmoudd550@gmail.com">Start a conversation</a>
+          </div>
+        </nav>
+        <div class="nav-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode"></button><a class="btn btn-secondary nav-cta" href="mailto:mostafaa.mahmoudd550@gmail.com">Start a conversation</a></div>
+      </div>
+    </header>
+    <main id="main-content">
+      <section class="page-hero"><div class="container page-hero-inner" data-reveal><a class="back-link" href="blogs.html">Back to blog</a><span class="eyebrow">Laravel</span><h1>Laravel DB Transactions: when to use them and when not</h1><p class="muted">A practical note on transaction boundaries, failure handling, and keeping backend changes consistent without over-coupling the system.</p></div></section>
+      <section class="section"><div class="container detail-grid">
+        <article class="detail-panel card" data-reveal><h2>Article focus</h2><p class="muted">The article explains how to decide when a database transaction helps and when it can create unnecessary complexity. It is written for backend developers who want safer data changes without wrapping every operation by default.</p><ul class="project-points"><li>Choosing clear transaction boundaries around related data changes.</li><li>Avoiding hidden coupling between database writes and external side effects.</li><li>Thinking about rollback behavior before implementation details.</li></ul></article>
+        <aside class="detail-panel card" data-reveal><h2>Links</h2><div class="link-list"><a class="btn btn-primary" href="https://medium.com/@mostafaamahmoudd/laravel-db-transactions-when-to-use-them-and-when-not-to-0280464293f3" target="_blank" rel="noopener noreferrer">Read on Medium</a><a class="btn btn-secondary" href="https://medium.com/@mostafaamahmoudd" target="_blank" rel="noopener noreferrer">More articles</a><a class="btn btn-secondary" href="blogs.html">All blog posts</a></div></aside>
+      </div></section>
+    </main>
+    <script src="js/profile.js" defer></script><script src="js/theme.js" defer></script><script src="js/nav.js" defer></script><script src="js/reveal.js" defer></script>
+  </body>
+</html>

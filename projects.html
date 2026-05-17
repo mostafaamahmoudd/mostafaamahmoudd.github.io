@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Mostafa Mahmoud</title>
+    <meta
+      name="description"
+      content="Backend projects by Mostafa Mahmoud, including Laravel APIs, service platforms, admin dashboards, and production business workflows."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d0f12" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=general-sans@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" id="top">
+      <div class="container nav-shell">
+        <a class="brand" href="index.html#top" aria-label="Go to home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="favicon.svg" alt="" width="40" height="40" decoding="async" />
+          </span>
+          <span data-profile-role>Backend Developer</span>
+        </a>
+        <nav aria-label="Primary">
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+            <span class="sr-only">Toggle navigation</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 7H20M4 12H20M4 17H20" stroke-linecap="round" />
+            </svg>
+          </button>
+          <div class="nav-menu" id="site-menu" data-nav-menu>
+            <ul class="nav-links" role="list">
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#skills">Skills</a></li>
+              <li><a href="index.html#journey">Journey</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+              <li><a class="active" href="projects.html">Projects</a></li>
+              <li><a href="blogs.html">Blog</a></li>
+            </ul>
+            <a class="btn btn-primary mobile-menu-cta" href="mailto:mostafaa.mahmoudd550@gmail.com">Start a conversation</a>
+          </div>
+        </nav>
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode"></button>
+          <a class="btn btn-secondary nav-cta" href="mailto:mostafaa.mahmoudd550@gmail.com">Start a conversation</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="container page-hero-inner" data-reveal>
+          <a class="back-link" href="index.html">Back home</a>
+          <span class="eyebrow">Projects</span>
+          <h1>Selected backend work built around real product flows.</h1>
+          <p class="muted">
+            Each project has a focused detail page with the system context,
+            responsibilities, stack, and related links.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container projects-grid listing-grid" data-stagger>
+          <article class="project-card card" data-reveal>
+            <div class="project-top">
+              <div>
+                <span class="project-index">Project 01</span>
+                <h2>ElMohandes</h2>
+              </div>
+              <span class="mini-badge">Service marketplace</span>
+            </div>
+            <p class="muted">
+              A production mobile service marketplace supported by scalable
+              backend APIs and a full administrative dashboard.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Laravel</span>
+              <span class="chip">PHP</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">REST APIs</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="project-elmohandes.html">Project details</a>
+              <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.true.elmohandesclients&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">Live app</a>
+            </div>
+          </article>
+
+          <article class="project-card card" data-reveal>
+            <div class="project-top">
+              <div>
+                <span class="project-index">Project 02</span>
+                <h2>SATIC</h2>
+              </div>
+              <span class="mini-badge">Retail management</span>
+            </div>
+            <p class="muted">
+              A production retail management platform for cement distribution,
+              selling workflows, order processing, and business logic.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Laravel</span>
+              <span class="chip">Business workflows</span>
+              <span class="chip">Order processing</span>
+              <span class="chip">System logic</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="project-satic.html">Project details</a>
+              <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.true.satic&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">Live app</a>
+            </div>
+          </article>
+
+          <article class="project-card card" data-reveal>
+            <div class="project-top">
+              <div>
+                <span class="project-index">Project 03</span>
+                <h2>Salahly</h2>
+              </div>
+              <span class="mini-badge">Service platform</span>
+            </div>
+            <p class="muted">
+              A service platform connecting customers with technicians through
+              booking, tracking, admin, and provider management workflows.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Laravel</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">Booking systems</span>
+              <span class="chip">Admin dashboards</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="project-salahly.html">Project details</a>
+              <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.salahly.app" target="_blank" rel="noopener noreferrer">Live app</a>
+            </div>
+          </article>
+
+          <article class="project-card card" data-reveal>
+            <div class="project-top">
+              <div>
+                <span class="project-index">Project 04</span>
+                <h2>BAS10 Platform</h2>
+              </div>
+              <span class="mini-badge">Consultation system</span>
+            </div>
+            <p class="muted">
+              A consultation and scheduling platform with backend APIs,
+              session management, user flows, and performance improvements.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Laravel</span>
+              <span class="chip">Scheduling</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">System design</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="project-bas10.html">Project details</a>
+              <a class="btn btn-secondary" href="https://bas-10.com/" target="_blank" rel="noopener noreferrer">Live website</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/profile.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/reveal.js" defer></script>
+  </body>
+</html>
