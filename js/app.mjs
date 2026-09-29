@@ -19,6 +19,8 @@ const icons = {
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
 };
 
+const crowVariants = ["wing-wide", "wing-cut", "wing-glide", "wing-split"];
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -41,9 +43,11 @@ function socialLinks() {
   return [
     ["GitHub", profile.social.github],
     ["LinkedIn", profile.social.linkedin],
+    ["X", profile.social.x],
     ["Medium", profile.social.medium],
     ["Email", `mailto:${profile.email}`],
   ]
+    .filter(([, href]) => Boolean(href))
     .map(
       ([label, href]) =>
         `<a href="${escapeHtml(href)}" ${
@@ -53,13 +57,34 @@ function socialLinks() {
     .join("");
 }
 
+function crowMarkup(count, prefix = "crow") {
+  return Array.from({ length: count }, (_, index) => {
+    const variant = crowVariants[index % crowVariants.length];
+    return `<span class="${prefix} ${variant}" style="--i:${index}" aria-hidden="true"></span>`;
+  }).join("");
+}
+
+function renderOcularSeal(extraClass = "") {
+  return `
+    <div class="ocular-seal ${extraClass}" aria-hidden="true">
+      <span class="seal-ring seal-ring-outer"></span>
+      <span class="seal-ring seal-ring-middle"></span>
+      <span class="seal-ring seal-ring-inner"></span>
+      <span class="seal-blade seal-blade-one"></span>
+      <span class="seal-blade seal-blade-two"></span>
+      <span class="seal-blade seal-blade-three"></span>
+      <span class="seal-pupil"></span>
+    </div>`;
+}
+
 function renderHeader() {
   const links = [
     ["Home", "#home"],
     ["About", "#about"],
-    ["Stack", "#stack"],
     ["Experience", "#experience"],
     ["Projects", "#projects"],
+    ["Writing", "#writing"],
+    ["Stack", "#stack"],
     ["Contact", "#contact"],
   ];
 
@@ -96,32 +121,51 @@ function renderHeader() {
 function renderHero() {
   return `
     <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-cinematic" data-hero-cinematic aria-hidden="true">
+        <div class="hero-night"></div>
+        <div class="eclipse-moon" data-moon></div>
+        <div class="moon-haze"></div>
+        <div class="roofline"></div>
+        <div class="pole-silhouette"></div>
+        <div class="shinobi-silhouette" data-shinobi>
+          <span class="shinobi-head"></span>
+          <span class="shinobi-hair"></span>
+          <span class="shinobi-collar"></span>
+          <span class="shinobi-torso"></span>
+          <span class="shinobi-cloak"></span>
+          <span class="shinobi-arm shinobi-arm-left"></span>
+          <span class="shinobi-arm shinobi-arm-right"></span>
+          <span class="shinobi-leg shinobi-leg-left"></span>
+          <span class="shinobi-leg shinobi-leg-right"></span>
+          <span class="crimson-eye crimson-eye-left"></span>
+          <span class="crimson-eye crimson-eye-right"></span>
+        </div>
+        <div class="crow-swarm" data-crow-swarm>${crowMarkup(24, "hero-crow")}</div>
+        ${renderOcularSeal("hero-seal")}
+      </div>
       <div class="wide-container hero-grid">
-        <div class="hero-copy" data-reveal>
-          <p class="kicker">&gt; whoami</p>
+        <div class="hero-copy" data-hero-copy data-reveal>
+          <p class="kicker">&gt; whoami / backend</p>
           <h1 class="hero-title" id="hero-title">Mostafa <span>Mahmoud</span></h1>
-          <p class="hero-subtitle">Backend systems engineered with clean architecture and production discipline.</p>
+          <p class="hero-subtitle">${escapeHtml(profile.role)} building Laravel APIs, business workflows, and production backend systems.</p>
           <p class="hero-lead">${escapeHtml(profile.intro)}</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#projects">View projects ${icons.arrow}</a>
-            <a class="btn btn-secondary" href="mailto:${escapeHtml(profile.email)}">Start a conversation</a>
+            <a class="btn btn-primary" href="#projects" data-hero-activate>View Work ${icons.arrow}</a>
+            <a class="btn btn-secondary" href="mailto:${escapeHtml(profile.email)}">Contact</a>
           </div>
-          <div class="social-row" aria-label="Social links">${socialLinks()}</div>
+          <div class="social-rail" aria-label="Social links">${socialLinks()}</div>
         </div>
-        <div class="hero-panel" aria-label="Profile atmosphere" data-reveal>
-          <div class="radial-eye" aria-hidden="true"></div>
+        <div class="hero-system" data-reveal>
+          ${renderOcularSeal("system-seal")}
           <div class="terminal-card">
             <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <p class="code-line">&gt; developer.name</p>
+            <p class="code-line">&gt; identity</p>
             <p class="code-line"><strong>"${escapeHtml(profile.name)}"</strong></p>
-            <p class="code-line">&gt; stack.focus</p>
+            <p class="code-line">&gt; discipline</p>
             <p class="code-line"><strong>"${escapeHtml(profile.focus)}"</strong></p>
-            <p class="code-line">&gt; current.mode</p>
-            <p class="code-line"><strong>"building reliable backend flows"</strong></p>
+            <p class="code-line">&gt; mode</p>
+            <p class="code-line"><strong>"calm systems / sharp execution"</strong></p>
           </div>
-          <figure class="portrait-card">
-            <img src="${escapeHtml(profile.portrait)}" alt="${escapeHtml(profile.name)}" width="960" height="1280" fetchpriority="high" decoding="async" />
-          </figure>
         </div>
       </div>
     </section>`;
@@ -166,11 +210,13 @@ function renderSkills() {
           <h2 class="section-title" id="stack-title">Backend capabilities built around systems, APIs, and maintainability.</h2>
           <p class="section-copy">The focus is not just on tools, but on using them to build reliable, structured, and scalable backend applications.</p>
         </div>
+        <div class="skill-constellation" aria-hidden="true"></div>
         <div class="skills-grid" data-stagger>
           ${skillGroups
             .map(
               (group) => `
                 <article class="skill-card" data-reveal data-tilt>
+                  <span class="skill-node" aria-hidden="true"></span>
                   <div>
                     <p class="eyebrow">${escapeHtml(group.label)}</p>
                     <h3>${escapeHtml(group.title)}</h3>
@@ -188,6 +234,7 @@ function renderSkills() {
 function renderJourney() {
   return `
     <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="tsukuyomi-field" aria-hidden="true"></div>
       <div class="container">
         <div class="section-header" data-reveal>
           <p class="eyebrow">Experience</p>
@@ -199,6 +246,7 @@ function renderJourney() {
             .map(
               (item) => `
                 <article class="timeline-card" data-reveal>
+                  <span class="timeline-node" aria-hidden="true"></span>
                   <div class="timeline-meta">
                     <span>${escapeHtml(item.label)}</span>
                     <span>${escapeHtml(item.meta)}</span>
@@ -219,6 +267,7 @@ function renderProjects() {
   const feature = projects[0];
   return `
     <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-crows" aria-hidden="true">${crowMarkup(5, "section-crow")}</div>
       <div class="wide-container projects-layout">
         <div class="project-feature" data-reveal>
           <div class="glass-card">
@@ -234,6 +283,7 @@ function renderProjects() {
             .map(
               (project, index) => `
                 <article class="project-card" id="project-card-${escapeHtml(project.slug)}" data-reveal data-tilt>
+                  <span class="card-crow wing-glide" aria-hidden="true"></span>
                   <div class="project-meta">
                     <span>Project ${String(index + 1).padStart(2, "0")}</span>
                     <span>${escapeHtml(project.type)}</span>
@@ -290,15 +340,17 @@ function renderContact() {
     ["Email", `mailto:${profile.email}`, profile.email],
     ["GitHub", profile.social.github, "github.com/mostafaamahmoudd"],
     ["LinkedIn", profile.social.linkedin, "linkedin.com/in/mostafaamahmoudd"],
+    ["X", profile.social.x, profile.social.x?.replace(/^https?:\/\//, "")],
     ["Medium", profile.social.medium, "medium.com/@mostafaamahmoudd"],
-  ];
+  ].filter(([, href]) => Boolean(href));
 
   return `
     <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-crows" aria-hidden="true">${crowMarkup(7, "contact-crow")}</div>
       <div class="container contact-grid">
         <div class="contact-panel" data-reveal>
           <p class="eyebrow">Contact</p>
-          <h2 class="section-title" id="contact-title">Break the loop. Build the system.</h2>
+          <h2 class="section-title" id="contact-title">Let's build something reliable.</h2>
           <p class="section-copy">${escapeHtml(profile.availability)}</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">Email Mostafa ${icons.arrow}</a>
@@ -337,6 +389,7 @@ function renderFooter() {
 function renderDialog() {
   return `
     <dialog class="detail-dialog" data-detail-dialog aria-labelledby="detail-title">
+      <div class="dialog-illusion" aria-hidden="true">${crowMarkup(3, "dialog-crow")}</div>
       <div class="detail-surface">
         <button class="detail-close" type="button" data-close-dialog aria-label="Close details">${icons.close}</button>
         <div data-detail-content></div>
@@ -493,6 +546,8 @@ function setupDetailRoutes() {
     content.innerHTML = detailTemplate(item, kind);
     document.body.classList.add("is-locked");
     if (!dialog.open) dialog.showModal();
+    dialog.classList.remove("is-appearing");
+    requestAnimationFrame(() => dialog.classList.add("is-appearing"));
     closeButton.focus();
   }
 
@@ -533,7 +588,7 @@ function setupDetailRoutes() {
 }
 
 function setupSectionHashScrolling() {
-  function scrollToSectionHash() {
+  function scrollToSectionHash(behavior = "smooth") {
     const hash = decodeURIComponent(location.hash || "");
     if (!hash || hash.startsWith("#project/") || hash.startsWith("#article/")) return;
 
@@ -543,25 +598,80 @@ function setupSectionHashScrolling() {
     window.requestAnimationFrame(() => {
       target.scrollIntoView({
         block: "start",
-        behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+        behavior: prefersReducedMotion.matches ? "auto" : behavior,
       });
     });
   }
 
-  window.addEventListener("hashchange", scrollToSectionHash);
-  scrollToSectionHash();
+  window.addEventListener("hashchange", () => scrollToSectionHash("smooth"));
+  window.setTimeout(() => scrollToSectionHash("auto"), 0);
 }
 
 function renderNotFound() {
   app.innerHTML = `
     <main class="not-found">
+      <div class="not-found-scene" aria-hidden="true">
+        <div class="eclipse-moon"></div>
+        <span class="not-found-crow wing-wide"></span>
+      </div>
       <section class="container not-found-card glass-card">
-        <p class="eyebrow">404 · Genjutsu break</p>
-        <h1 class="section-title">This route dissolved into shadow.</h1>
+        <p class="eyebrow">404 · Illusion break</p>
+        <h1 class="section-title">The illusion broke.</h1>
         <p class="section-copy">The portfolio content is still here. Return to the main path and keep moving.</p>
         <p><a class="btn btn-primary" href="index.html#home">Return home ${icons.arrow}</a></p>
       </section>
     </main>`;
+}
+
+function setupHeroCinematic() {
+  const hero = document.querySelector("[data-hero-cinematic]");
+  const moon = document.querySelector("[data-moon]");
+  const activate = document.querySelector("[data-hero-activate]");
+  const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (!hero) return;
+
+  if (prefersReducedMotion.matches) {
+    hero.classList.add("is-complete");
+    document.body.classList.add("hero-intro-complete");
+    return;
+  }
+
+  window.setTimeout(() => document.body.classList.add("hero-intro-complete"), 2600);
+
+  activate?.addEventListener("pointerenter", () => hero.classList.add("is-activated"));
+  activate?.addEventListener("focus", () => hero.classList.add("is-activated"));
+  activate?.addEventListener("pointerleave", () => hero.classList.remove("is-activated"));
+  activate?.addEventListener("blur", () => hero.classList.remove("is-activated"));
+
+  if (!supportsFinePointer || !moon) return;
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      const x = (event.clientX / window.innerWidth - 0.5) * 16;
+      const y = (event.clientY / window.innerHeight - 0.5) * 10;
+      moon.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    },
+    { passive: true },
+  );
+}
+
+function setupIllusionMoments() {
+  if (prefersReducedMotion.matches || !("IntersectionObserver" in window)) return;
+
+  const targets = document.querySelectorAll("#experience, #projects");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || entry.target.classList.contains("is-illusion-revealed")) return;
+        entry.target.classList.add("is-illusion-revealed");
+      });
+    },
+    { threshold: 0.28 },
+  );
+
+  targets.forEach((target) => observer.observe(target));
 }
 
 function setupPointerEffects() {
@@ -617,10 +727,12 @@ function hideLoader() {
 }
 
 renderApp();
+setupHeroCinematic();
 setupReveal();
 setupNav();
 setupDetailRoutes();
 setupSectionHashScrolling();
+setupIllusionMoments();
 setupPointerEffects();
 setupTilt();
 hideLoader();

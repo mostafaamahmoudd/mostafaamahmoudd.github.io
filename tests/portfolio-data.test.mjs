@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -58,4 +59,16 @@ test("legacy routes point into the SPA detail states", () => {
     legacyRoutes["blog-laravel-db-transactions.html"],
     "index.html#article/laravel-db-transactions",
   );
+});
+
+test("SPA renders the cinematic art-direction hooks without the portrait", () => {
+  const appSource = readFileSync(new URL("../js/app.mjs", import.meta.url), "utf8");
+
+  assert.match(appSource, /class="hero-cinematic"/);
+  assert.match(appSource, /class="eclipse-moon"/);
+  assert.match(appSource, /class="shinobi-silhouette"/);
+  assert.match(appSource, /class="crow-swarm"/);
+  assert.match(appSource, /class="ocular-seal /);
+  assert.match(appSource, /id="writing"/);
+  assert.doesNotMatch(appSource, /portrait-card|profile\.portrait/);
 });
