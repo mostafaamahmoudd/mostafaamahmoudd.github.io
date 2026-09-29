@@ -1,6 +1,6 @@
 {
-  "name": "Backend Developer Portfolio",
-  "short_name": "Portfolio",
+  "name": "Mostafa Mahmoud Portfolio",
+  "short_name": "Mostafa",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#0d0f12",
-  "background_color": "#0d0f12",
+  "theme_color": "#070709",
+  "background_color": "#070709",
   "display": "standalone"
 }
