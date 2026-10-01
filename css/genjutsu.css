@@ -453,6 +453,11 @@ svg {
   background: rgba(244, 244, 245, 0.055);
 }
 
+.btn-ghost {
+  color: var(--muted);
+  background: transparent;
+}
+
 .main-stage {
   position: relative;
 }
@@ -717,7 +722,7 @@ svg {
   background: #e01b2d;
   opacity: 0;
   box-shadow: 0 0 9px rgba(224, 27, 45, 0.9);
-  animation: eye-flash 520ms 1820ms var(--ease) forwards;
+  animation: eye-flash 560ms 1980ms var(--ease) forwards;
 }
 
 .crimson-eye-left {
@@ -742,7 +747,7 @@ svg {
   gap: 24px;
   opacity: 0;
   transform: translateY(16px);
-  animation: hero-copy-arrive 760ms 1880ms var(--ease) forwards;
+  animation: hero-copy-arrive 760ms 2140ms var(--ease) forwards;
 }
 
 .hero-intro-complete .hero-copy {
@@ -796,6 +801,15 @@ svg {
   color: var(--text);
   font-size: clamp(1.32rem, 2.25vw, 2.14rem);
   line-height: 1.16;
+}
+
+.hero-role {
+  margin: -12px 0 0;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .hero-lead {
@@ -862,83 +876,108 @@ svg {
   min-height: 530px;
 }
 
-.ocular-seal {
+.mangekyo-eye {
   position: relative;
   width: min(100%, 460px);
   aspect-ratio: 1;
-  opacity: 0.7;
-}
-
-.hero-seal {
-  position: absolute;
-  right: clamp(36px, 7vw, 150px);
-  bottom: clamp(54px, 10vh, 126px);
-  width: clamp(150px, 16vw, 270px);
-  opacity: 0;
-  transform: scale(0.8) rotate(-8deg);
-  animation: seal-awaken 1000ms 1780ms var(--ease) forwards;
-}
-
-.hero-cinematic.is-activated .hero-seal {
-  opacity: 0.82;
-}
-
-.system-seal {
-  position: absolute;
-  inset: 4% 0 auto auto;
-  opacity: 0.42;
-  filter: drop-shadow(0 0 50px rgba(176, 19, 34, 0.08));
-}
-
-.seal-ring,
-.seal-blade,
-.seal-pupil {
-  position: absolute;
-  inset: 0;
+  opacity: 0.72;
   border-radius: 50%;
 }
 
-.seal-ring-outer {
-  border: 1px solid rgba(238, 238, 242, 0.1);
+.hero-eye {
+  position: absolute;
+  right: clamp(42px, 8vw, 162px);
+  bottom: clamp(62px, 11vh, 138px);
+  width: clamp(170px, 18vw, 310px);
+  opacity: 0;
+  transform: scale(0.7);
+  animation: mangekyo-awaken 920ms 1900ms var(--ease) forwards;
+}
+
+.hero-cinematic.is-activated .hero-eye {
+  opacity: 0.82;
+}
+
+.system-eye {
+  position: absolute;
+  inset: 4% 0 auto auto;
+  opacity: 0.46;
+  filter: drop-shadow(0 0 50px rgba(176, 19, 34, 0.08));
+}
+
+.eye-iris,
+.eye-ring,
+.tomoe-blade,
+.eye-pupil {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.eye-iris {
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, #050506 0 9%, transparent 10%),
+    radial-gradient(circle, rgba(211, 26, 42, 0.62) 0 37%, rgba(112, 9, 17, 0.44) 56%, rgba(0, 0, 0, 0.82) 72%),
+    conic-gradient(from 8deg, rgba(255, 255, 255, 0.03), rgba(211, 26, 42, 0.1), transparent, rgba(211, 26, 42, 0.08), rgba(255, 255, 255, 0.02));
   box-shadow:
-    inset 0 0 38px rgba(255, 255, 255, 0.035),
-    0 0 74px rgba(176, 19, 34, 0.08);
+    inset 0 0 42px rgba(0, 0, 0, 0.78),
+    inset 0 0 5px rgba(255, 255, 255, 0.08),
+    0 0 74px rgba(176, 19, 34, 0.13);
 }
 
-.seal-ring-middle {
-  inset: 15%;
-  border: 1px solid rgba(211, 26, 42, 0.25);
-  clip-path: polygon(50% 0, 61% 34%, 96% 44%, 66% 61%, 71% 96%, 50% 71%, 29% 96%, 34% 61%, 4% 44%, 39% 34%);
-  transform: rotate(17deg);
-}
-
-.seal-ring-inner {
-  inset: 31%;
-  border: 1px solid rgba(238, 238, 242, 0.13);
-  background: radial-gradient(circle, rgba(211, 26, 42, 0.1), transparent 58%);
-}
-
-.seal-blade {
-  inset: 24%;
-  background: rgba(211, 26, 42, 0.18);
-  clip-path: polygon(50% 0, 59% 34%, 97% 45%, 64% 59%, 50% 100%, 36% 59%, 3% 45%, 41% 34%);
+.eye-iris::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+  opacity: 0.12;
   mix-blend-mode: screen;
 }
 
-.seal-blade-two {
-  transform: rotate(60deg);
-  opacity: 0.72;
+.eye-ring-outer {
+  inset: 7%;
+  border: 2px solid rgba(0, 0, 0, 0.72);
+  box-shadow: 0 0 0 1px rgba(211, 26, 42, 0.18);
 }
 
-.seal-blade-three {
+.eye-ring-inner {
+  inset: 36%;
+  border: 2px solid rgba(0, 0, 0, 0.86);
+  background: radial-gradient(circle, #010102 0 38%, transparent 40%);
+}
+
+.tomoe-blade {
+  top: 10%;
+  left: 39%;
+  width: 22%;
+  height: 48%;
+  background: #020203;
+  border-radius: 55% 55% 58% 58% / 42% 42% 72% 72%;
+  clip-path: path("M 50 0 C 88 20 92 62 56 100 C 48 78 30 68 4 68 C 24 49 34 28 50 0 Z");
+  transform-origin: 50% 84%;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+}
+
+.tomoe-blade-one {
+  transform: rotate(0deg);
+}
+
+.tomoe-blade-two {
   transform: rotate(120deg);
-  opacity: 0.48;
 }
 
-.seal-pupil {
-  inset: 45%;
-  background: rgba(211, 26, 42, 0.7);
-  box-shadow: 0 0 22px rgba(211, 26, 42, 0.42);
+.tomoe-blade-three {
+  transform: rotate(240deg);
+}
+
+.eye-pupil {
+  inset: 43%;
+  background: #020203;
+  border: 1px solid rgba(211, 26, 42, 0.22);
+  box-shadow:
+    0 0 16px rgba(0, 0, 0, 0.9),
+    0 0 28px rgba(211, 26, 42, 0.28);
 }
 
 .terminal-card {
@@ -991,11 +1030,13 @@ svg {
 .card-crow,
 .not-found-crow {
   position: absolute;
-  width: calc(28px + var(--i, 1) * 1px);
-  height: calc(14px + var(--i, 1) * 0.35px);
-  background: #010102;
+  width: var(--crow-w, 34px);
+  height: var(--crow-h, 18px);
+  background: linear-gradient(135deg, #050506 0 38%, #000 39% 100%);
   opacity: 0;
-  filter: blur(calc(var(--i, 0) * 0.025px));
+  filter:
+    drop-shadow(0 0 9px rgba(211, 26, 42, 0.18))
+    blur(var(--crow-blur, 0));
   clip-path: polygon(0 58%, 28% 22%, 47% 48%, 68% 0, 100% 60%, 62% 46%, 50% 100%, 38% 47%);
 }
 
@@ -1017,10 +1058,14 @@ svg {
 }
 
 .hero-crow {
-  left: calc(50% + (var(--i) - 12) * 10px);
-  top: calc(41% + var(--i) * 0.9%);
-  transform: rotate(calc(-22deg + var(--i) * 9deg)) scale(calc(0.52 + var(--i) * 0.018));
-  animation: hero-crow-flight 1050ms calc(1850ms + var(--i) * 24ms) var(--ease) forwards;
+  left: calc(100% - clamp(185px, 27vw, 458px) + var(--hero-x, 0px));
+  top: var(--hero-y, 42%);
+  transform: rotate(var(--hero-rot-start, -18deg)) scale(var(--hero-scale-start, 0.6));
+  animation: hero-crow-flight 1600ms var(--hero-delay, 1960ms) var(--ease) forwards;
+  filter:
+    drop-shadow(0 0 2px rgba(238, 238, 242, 0.16))
+    drop-shadow(0 0 14px rgba(211, 26, 42, 0.32))
+    blur(var(--crow-blur, 0));
 }
 
 .section-crows,
@@ -1031,20 +1076,20 @@ svg {
 }
 
 .section-crow {
-  right: calc(-8vw + var(--i) * 4vw);
-  top: calc(8% + var(--i) * 7%);
-  transform: rotate(calc(-18deg + var(--i) * 4deg));
+  right: var(--section-right, 0);
+  top: var(--section-top, 20%);
+  transform: rotate(var(--section-rot, -10deg));
 }
 
 #projects.is-illusion-revealed .section-crow {
-  animation: section-crow-sweep 1600ms calc(var(--i) * 80ms) var(--ease) forwards;
+  animation: section-crow-sweep 1600ms var(--section-delay, 0ms) var(--ease) forwards;
 }
 
 .contact-crow {
-  left: calc(12% + var(--i) * 9%);
+  left: var(--contact-left, 20%);
   bottom: 14%;
-  transform: rotate(calc(-11deg + var(--i) * 7deg)) scale(calc(0.58 + var(--i) * 0.08));
-  animation: contact-crow-leave 9s calc(var(--i) * 320ms) linear infinite;
+  transform: rotate(var(--contact-rot, -6deg)) scale(var(--contact-scale, 0.7));
+  animation: contact-crow-leave 10s var(--contact-delay, 0ms) linear infinite;
 }
 
 .card-crow {
@@ -1405,6 +1450,33 @@ svg {
   font-size: 0.8rem;
 }
 
+.project-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.project-metrics span {
+  min-height: 72px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.project-metrics strong {
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.35rem;
+}
+
 .writing-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(280px, 1fr);
@@ -1509,12 +1581,12 @@ svg {
 }
 
 .dialog-crow {
-  top: calc(34% + var(--i) * 9%);
-  left: calc(26% + var(--i) * 17%);
+  top: var(--dialog-top, 44%);
+  left: var(--dialog-left, 34%);
 }
 
 .detail-dialog.is-appearing .dialog-crow {
-  animation: dialog-crow-cut 520ms calc(var(--i) * 70ms) var(--ease) forwards;
+  animation: dialog-crow-cut 520ms var(--dialog-delay, 0ms) var(--ease) forwards;
 }
 
 .detail-surface {
@@ -1737,14 +1809,18 @@ svg {
 @keyframes hero-crow-flight {
   0% {
     opacity: 0;
-    transform: translate3d(0, 0, 0) rotate(calc(-22deg + var(--i) * 9deg)) scale(0.35);
+    transform: translate3d(0, 0, 0) rotate(var(--hero-rot-start, -18deg)) scale(0.26);
   }
   18% {
-    opacity: calc(0.38 + var(--i) * 0.01);
+    opacity: var(--hero-opacity-a, 0.58);
+  }
+  48% {
+    opacity: var(--hero-opacity-b, 0.66);
+    transform: translate3d(var(--hero-mid-x, -28vw), var(--hero-mid-y, -7vh), 0) rotate(var(--hero-rot-mid, -22deg)) scale(var(--hero-scale-mid, 0.8));
   }
   100% {
     opacity: 0;
-    transform: translate3d(calc(-42vw + var(--i) * 4.8vw), calc(-24vh + var(--i) * 2.2vh), 0) rotate(calc(-38deg + var(--i) * 15deg)) scale(calc(0.72 + var(--i) * 0.025));
+    transform: translate3d(var(--hero-end-x, -60vw), var(--hero-end-y, -18vh), 0) rotate(var(--hero-rot-end, -40deg)) scale(var(--hero-scale-end, 1));
   }
 }
 
@@ -1755,17 +1831,18 @@ svg {
   }
 }
 
-@keyframes seal-awaken {
+@keyframes mangekyo-awaken {
   0% {
     opacity: 0;
-    transform: scale(0.8) rotate(-8deg);
+    transform: scale(0.7);
   }
   42% {
     opacity: 0.72;
+    filter: blur(0);
   }
   100% {
-    opacity: 0.22;
-    transform: scale(1) rotate(0deg);
+    opacity: 0.34;
+    transform: scale(1);
   }
 }
 
@@ -1804,7 +1881,10 @@ svg {
     opacity: 0;
   }
   68% {
-    opacity: 0.16;
+    opacity: 0.24;
+  }
+  78% {
+    opacity: 0.13;
   }
   100% {
     opacity: 0;
@@ -1846,7 +1926,7 @@ svg {
     min-height: 360px;
   }
 
-  .system-seal {
+  .system-eye {
     right: 0;
     width: min(72vw, 420px);
   }
@@ -1958,7 +2038,7 @@ svg {
     animation-duration: 850ms;
   }
 
-  .system-seal {
+  .system-eye {
     width: 260px;
     opacity: 0.48;
   }
@@ -2020,7 +2100,7 @@ svg {
   .eclipse-moon,
   .moon-haze,
   .shinobi-silhouette,
-  .hero-seal {
+  .hero-eye {
     opacity: 1;
     transform: none;
   }

@@ -1,8 +1,10 @@
 import {
   articles,
+  education,
   journey,
   profile,
   projects,
+  resume,
   skillGroups,
   workingStyle,
 } from "./content.mjs";
@@ -60,20 +62,53 @@ function socialLinks() {
 function crowMarkup(count, prefix = "crow") {
   return Array.from({ length: count }, (_, index) => {
     const variant = crowVariants[index % crowVariants.length];
-    return `<span class="${prefix} ${variant}" style="--i:${index}" aria-hidden="true"></span>`;
+    const n = index + 1;
+    const style = [
+      `--i:${index}`,
+      `--crow-w:${30 + n * 2.25}px`,
+      `--crow-h:${15 + n * 0.9}px`,
+      `--crow-blur:${Math.min(1.6, n * 0.035)}px`,
+      `--hero-x:${(n - 12) * 2}px`,
+      `--hero-y:${30 + n * 1.05}%`,
+      `--hero-rot-start:${-28 + n * 8}deg`,
+      `--hero-rot-mid:${-44 + n * 11}deg`,
+      `--hero-rot-end:${-58 + n * 14}deg`,
+      `--hero-scale-start:${(0.54 + n * 0.038).toFixed(3)}`,
+      `--hero-scale-mid:${(0.78 + n * 0.058).toFixed(3)}`,
+      `--hero-scale-end:${(0.96 + n * 0.074).toFixed(3)}`,
+      `--hero-mid-x:${(-24 - n * 0.7).toFixed(2)}vw`,
+      `--hero-mid-y:${(-9 + n * 0.9).toFixed(2)}vh`,
+      `--hero-end-x:${(-72 + n * 2.4).toFixed(2)}vw`,
+      `--hero-end-y:${(-24 + n * 1.75).toFixed(2)}vh`,
+      `--hero-opacity-a:${Math.min(0.92, 0.58 + n * 0.018).toFixed(3)}`,
+      `--hero-opacity-b:${Math.min(0.9, 0.66 + n * 0.012).toFixed(3)}`,
+      `--hero-delay:${1960 + n * 23}ms`,
+      `--section-right:${(-8 + n * 4).toFixed(2)}vw`,
+      `--section-top:${8 + n * 7}%`,
+      `--section-rot:${-18 + n * 4}deg`,
+      `--section-delay:${n * 80}ms`,
+      `--contact-left:${12 + n * 9}%`,
+      `--contact-rot:${-11 + n * 7}deg`,
+      `--contact-scale:${(0.58 + n * 0.08).toFixed(3)}`,
+      `--contact-delay:${n * 360}ms`,
+      `--dialog-top:${34 + n * 9}%`,
+      `--dialog-left:${26 + n * 17}%`,
+      `--dialog-delay:${n * 70}ms`,
+    ].join(";");
+    return `<span class="${prefix} ${variant}" style="${style}" aria-hidden="true"></span>`;
   }).join("");
 }
 
-function renderOcularSeal(extraClass = "") {
+function renderMangekyoEye(extraClass = "") {
   return `
-    <div class="ocular-seal ${extraClass}" aria-hidden="true">
-      <span class="seal-ring seal-ring-outer"></span>
-      <span class="seal-ring seal-ring-middle"></span>
-      <span class="seal-ring seal-ring-inner"></span>
-      <span class="seal-blade seal-blade-one"></span>
-      <span class="seal-blade seal-blade-two"></span>
-      <span class="seal-blade seal-blade-three"></span>
-      <span class="seal-pupil"></span>
+    <div class="mangekyo-eye ${extraClass}" aria-hidden="true">
+      <span class="eye-iris"></span>
+      <span class="eye-ring eye-ring-outer"></span>
+      <span class="eye-ring eye-ring-inner"></span>
+      <span class="tomoe-blade tomoe-blade-one"></span>
+      <span class="tomoe-blade tomoe-blade-two"></span>
+      <span class="tomoe-blade tomoe-blade-three"></span>
+      <span class="eye-pupil"></span>
     </div>`;
 }
 
@@ -83,8 +118,8 @@ function renderHeader() {
     ["About", "#about"],
     ["Experience", "#experience"],
     ["Projects", "#projects"],
-    ["Writing", "#writing"],
     ["Stack", "#stack"],
+    ["Writing", "#writing"],
     ["Contact", "#contact"],
   ];
 
@@ -141,30 +176,32 @@ function renderHero() {
           <span class="crimson-eye crimson-eye-right"></span>
         </div>
         <div class="crow-swarm" data-crow-swarm>${crowMarkup(24, "hero-crow")}</div>
-        ${renderOcularSeal("hero-seal")}
+        ${renderMangekyoEye("hero-eye")}
       </div>
       <div class="wide-container hero-grid">
         <div class="hero-copy" data-hero-copy data-reveal>
           <p class="kicker">&gt; whoami / backend</p>
-          <h1 class="hero-title" id="hero-title">Mostafa <span>Mahmoud</span></h1>
-          <p class="hero-subtitle">${escapeHtml(profile.role)} building Laravel APIs, business workflows, and production backend systems.</p>
-          <p class="hero-lead">${escapeHtml(profile.intro)}</p>
+          <h1 class="hero-title" id="hero-title">${escapeHtml(profile.name.split(" ")[0])} <span>${escapeHtml(profile.name.split(" ").slice(1).join(" "))}</span></h1>
+          <p class="hero-role">${escapeHtml(profile.role)}</p>
+          <p class="hero-subtitle">Building reliable Laravel APIs, business systems, and backend architecture.</p>
+          <p class="hero-lead">Currently building EasyLink CRM at DrCorp as the sole backend engineer behind API architecture, workflows, and automated testing.</p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#projects" data-hero-activate>View Work ${icons.arrow}</a>
-            <a class="btn btn-secondary" href="mailto:${escapeHtml(profile.email)}">Contact</a>
+            <a class="btn btn-secondary" href="${escapeHtml(resume.path)}" target="_blank" rel="noopener noreferrer" aria-label="View Mustafa Mahmoud CV PDF">View CV</a>
+            <a class="btn btn-ghost" href="mailto:${escapeHtml(profile.email)}">Contact</a>
           </div>
           <div class="social-rail" aria-label="Social links">${socialLinks()}</div>
         </div>
         <div class="hero-system" data-reveal>
-          ${renderOcularSeal("system-seal")}
+          ${renderMangekyoEye("system-eye")}
           <div class="terminal-card">
             <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
             <p class="code-line">&gt; identity</p>
             <p class="code-line"><strong>"${escapeHtml(profile.name)}"</strong></p>
-            <p class="code-line">&gt; discipline</p>
+            <p class="code-line">&gt; current.role</p>
+            <p class="code-line"><strong>"DrCorp / Back-End Engineer"</strong></p>
+            <p class="code-line">&gt; focus</p>
             <p class="code-line"><strong>"${escapeHtml(profile.focus)}"</strong></p>
-            <p class="code-line">&gt; mode</p>
-            <p class="code-line"><strong>"calm systems / sharp execution"</strong></p>
           </div>
         </div>
       </div>
@@ -181,8 +218,22 @@ function renderAbout() {
           ${profile.about.map((paragraph) => `<p class="section-copy">${escapeHtml(paragraph)}</p>`).join("")}
         </div>
         <aside class="glass-card" data-reveal>
-          <p class="eyebrow">Operating pattern</p>
+          <p class="eyebrow">Current signal</p>
           <ul class="style-list">
+            <li>
+              <span class="index">CV</span>
+              <span>
+                <strong>DrCorp · Back-End Engineer</strong><br />
+                <span class="muted">Jan 2026 – Present · Mansoura, Egypt</span>
+              </span>
+            </li>
+            <li>
+              <span class="index">ED</span>
+              <span>
+                <strong>${escapeHtml(education.school)}</strong><br />
+                <span class="muted">${escapeHtml(education.degree)} · ${escapeHtml(education.period)} · Graduation project ${escapeHtml(education.graduationProject)}</span>
+              </span>
+            </li>
             ${workingStyle
               .map(
                 (item, index) => `
@@ -238,8 +289,8 @@ function renderJourney() {
       <div class="container">
         <div class="section-header" data-reveal>
           <p class="eyebrow">Experience</p>
-          <h2 class="section-title" id="experience-title">A practical path through Laravel APIs, production workflows, and system design.</h2>
-          <p class="section-copy">The repository does not include dated employment entries, so this section preserves the existing journey narrative without inventing companies or years.</p>
+          <h2 class="section-title" id="experience-title">Professional backend roles across CRM, mobile APIs, scheduling, and service platforms.</h2>
+          <p class="section-copy">Dates and titles are synced from the local CV. Overlapping roles are preserved as factual experience.</p>
         </div>
         <div class="timeline" data-stagger>
           ${journey
@@ -248,10 +299,11 @@ function renderJourney() {
                 <article class="timeline-card" data-reveal>
                   <span class="timeline-node" aria-hidden="true"></span>
                   <div class="timeline-meta">
-                    <span>${escapeHtml(item.label)}</span>
-                    <span>${escapeHtml(item.meta)}</span>
+                    <span>${escapeHtml(item.period)}</span>
+                    <span>${escapeHtml(item.location)}</span>
                   </div>
-                  <h3>${escapeHtml(item.title)}</h3>
+                  <p class="eyebrow">${escapeHtml(item.label)} · ${escapeHtml(item.meta)}</p>
+                  <h3>${escapeHtml(item.company)} · ${escapeHtml(item.title)}</h3>
                   <ul>
                     ${item.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
                   </ul>
@@ -272,10 +324,15 @@ function renderProjects() {
         <div class="project-feature" data-reveal>
           <div class="glass-card">
             <span class="cloud-line" aria-hidden="true"></span>
-            <p class="eyebrow">Featured systems</p>
-            <h2 class="section-title" id="projects-title">Production backend work, organized for fast scanning.</h2>
+            <p class="eyebrow">Featured backend work</p>
+            <h2 class="section-title" id="projects-title">${escapeHtml(feature.title)}</h2>
             <p class="section-copy">${escapeHtml(feature.summary)}</p>
-            <p class="project-stack">${escapeHtml(projects.length)} projects · Laravel APIs · Admin workflows · Mobile integrations</p>
+            <div class="project-metrics">
+              <span><strong>${escapeHtml(feature.metrics.endpoints)}</strong> APIs</span>
+              <span><strong>${escapeHtml(feature.metrics.tests)}</strong> tests</span>
+              <span><strong>${escapeHtml(feature.metrics.pipelineStages)}</strong> stages</span>
+            </div>
+            <p class="project-stack">${escapeHtml(feature.role)} · Internal CRM · No public demo</p>
           </div>
         </div>
         <div class="project-grid" data-stagger>
@@ -293,7 +350,11 @@ function renderProjects() {
                   <div class="chip-row">${chipList(project.stack, ["Laravel", "PHP", "REST APIs"])}</div>
                   <footer>
                     <button class="btn btn-primary" type="button" data-open-project="${escapeHtml(project.slug)}">Details ${icons.arrow}</button>
-                    <a class="btn btn-secondary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.liveLabel)}</a>
+                    ${
+                      project.liveUrl
+                        ? `<a class="btn btn-secondary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.liveLabel)}</a>`
+                        : ""
+                    }
                   </footer>
                 </article>`,
             )
@@ -309,8 +370,8 @@ function renderWriting() {
       <div class="container writing-grid">
         <div class="section-header" data-reveal>
           <p class="eyebrow">Writing</p>
-          <h2 class="section-title" id="writing-title">Practical notes from backend work.</h2>
-          <p class="section-copy">A small writing section is included because the existing repository links to one real Laravel article.</p>
+          <h2 class="section-title" id="writing-title">Technical Writing</h2>
+          <p class="section-copy">One real Laravel article is preserved because writing shows how backend decisions are explained, not just implemented.</p>
         </div>
         <div class="article-grid">
           ${articles
@@ -353,8 +414,8 @@ function renderContact() {
           <h2 class="section-title" id="contact-title">Let's build something reliable.</h2>
           <p class="section-copy">${escapeHtml(profile.availability)}</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">Email Mostafa ${icons.arrow}</a>
-            <a class="btn btn-secondary" href="#projects">Review projects</a>
+            <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">Email Mustafa ${icons.arrow}</a>
+            <a class="btn btn-secondary" href="${escapeHtml(resume.path)}" target="_blank" rel="noopener noreferrer">View CV</a>
           </div>
         </div>
         <aside class="glass-card" data-reveal>
@@ -381,7 +442,7 @@ function renderFooter() {
     <footer class="footer">
       <div class="container footer-inner">
         <span>${escapeHtml(profile.name)} · ${escapeHtml(profile.role)}</span>
-        <span>PHP · Laravel · REST APIs</span>
+        <span>GitHub · LinkedIn · Email · Medium</span>
       </div>
     </footer>`;
 }
@@ -404,9 +465,9 @@ function renderApp() {
       <main class="main-stage" id="main-content">
         ${renderHero()}
         ${renderAbout()}
-        ${renderSkills()}
         ${renderJourney()}
         ${renderProjects()}
+        ${renderSkills()}
         ${renderWriting()}
         ${renderContact()}
       </main>
@@ -441,7 +502,11 @@ function detailTemplate(item, kind) {
         <aside class="detail-stack">
           <h3>${isProject ? "Stack" : "Source"}</h3>
           <div class="chip-row">${chipList(stack, ["Laravel", "PHP", "REST APIs"])}</div>
-          <a class="btn btn-primary" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ${icons.arrow}</a>
+          ${
+            href
+              ? `<a class="btn btn-primary" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ${icons.arrow}</a>`
+              : `<p class="muted">Internal project. Public source code and demo are not exposed.</p>`
+          }
         </aside>
       </div>
     </div>`;
@@ -596,8 +661,12 @@ function setupSectionHashScrolling() {
     if (!target) return;
 
     window.requestAnimationFrame(() => {
-      target.scrollIntoView({
-        block: "start",
+      target.querySelectorAll("[data-reveal]").forEach((item) => item.classList.add("is-visible"));
+      const header = document.querySelector(".site-header");
+      const headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: Math.max(0, top),
         behavior: prefersReducedMotion.matches ? "auto" : behavior,
       });
     });
@@ -605,6 +674,8 @@ function setupSectionHashScrolling() {
 
   window.addEventListener("hashchange", () => scrollToSectionHash("smooth"));
   window.setTimeout(() => scrollToSectionHash("auto"), 0);
+  window.setTimeout(() => scrollToSectionHash("auto"), 260);
+  document.fonts?.ready.then(() => scrollToSectionHash("auto")).catch(() => {});
 }
 
 function renderNotFound() {
@@ -637,7 +708,7 @@ function setupHeroCinematic() {
     return;
   }
 
-  window.setTimeout(() => document.body.classList.add("hero-intro-complete"), 2600);
+  window.setTimeout(() => document.body.classList.add("hero-intro-complete"), 3100);
 
   activate?.addEventListener("pointerenter", () => hero.classList.add("is-activated"));
   activate?.addEventListener("focus", () => hero.classList.add("is-activated"));
