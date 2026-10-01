@@ -236,6 +236,97 @@ svg {
   margin: -34px 0 0 -34px;
 }
 
+.has-shuriken-cursor .cursor-aura {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-shuriken-cursor,
+  .has-shuriken-cursor a,
+  .has-shuriken-cursor button,
+  .has-shuriken-cursor [role="button"],
+  .has-shuriken-cursor summary {
+    cursor: none;
+  }
+}
+
+.shuriken-cursor {
+  position: fixed;
+  z-index: 500;
+  left: -11px;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-80px, -80px, 0);
+  transform-origin: 50% 50%;
+  transition:
+    opacity 160ms var(--ease),
+    width 160ms var(--ease),
+    height 160ms var(--ease),
+    filter 160ms var(--ease);
+}
+
+.shuriken-cursor.is-ready {
+  opacity: 0.92;
+}
+
+.shuriken-cursor svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter:
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.88))
+    drop-shadow(0 0 6px rgba(211, 26, 42, 0.13));
+}
+
+.shuriken-blade {
+  fill: #111114;
+  stroke: rgba(240, 240, 242, 0.26);
+  stroke-width: 0.9;
+  stroke-linejoin: round;
+}
+
+.shuriken-core {
+  fill: #8f101b;
+  stroke: #050506;
+  stroke-width: 1;
+}
+
+.shuriken-hole {
+  fill: #050506;
+}
+
+.shuriken-cursor.is-hovering {
+  width: 25px;
+  height: 25px;
+  filter: drop-shadow(0 0 10px rgba(211, 26, 42, 0.28));
+}
+
+.shuriken-cursor.is-hovering .shuriken-core,
+.shuriken-cursor.is-mangekyo .shuriken-core {
+  fill: #d21a2b;
+}
+
+.shuriken-cursor.is-clicking {
+  animation: shuriken-click 180ms var(--ease);
+}
+
+.shuriken-cursor.is-clicking::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(211, 26, 42, 0.5);
+  border-radius: 50%;
+  animation: cursor-pulse 180ms var(--ease) forwards;
+}
+
+.shuriken-cursor.is-mangekyo .shuriken-blade {
+  fill: #130305;
+  stroke: rgba(211, 26, 42, 0.55);
+}
+
 .site-shell {
   position: relative;
   min-height: 100dvh;
@@ -508,14 +599,15 @@ svg {
   aspect-ratio: 1;
   border-radius: 50%;
   background:
+    radial-gradient(circle at 31% 29%, rgba(255, 255, 255, 0.13), transparent 0.65%),
     radial-gradient(circle at 43% 36%, rgba(255, 255, 255, 0.16), transparent 0.8%),
     radial-gradient(circle at 61% 53%, rgba(255, 255, 255, 0.09), transparent 1.2%),
-    radial-gradient(circle at 50% 50%, rgba(136, 15, 26, 0.38) 0 31%, rgba(75, 8, 14, 0.42) 44%, rgba(18, 18, 21, 0.62) 64%, transparent 68%),
+    radial-gradient(circle at 58% 46%, rgba(188, 19, 34, 0.52) 0 28%, rgba(92, 8, 16, 0.5) 46%, rgba(18, 18, 21, 0.68) 64%, transparent 70%),
     radial-gradient(circle, rgba(238, 238, 242, 0.16), rgba(125, 125, 132, 0.09) 42%, transparent 70%);
   box-shadow:
     inset 46px -20px 78px rgba(0, 0, 0, 0.86),
     inset -18px 10px 44px rgba(240, 240, 242, 0.08),
-    0 0 120px rgba(176, 19, 34, 0.24),
+    0 0 132px rgba(176, 19, 34, 0.26),
     0 0 240px rgba(238, 238, 242, 0.08);
   filter: saturate(0.88);
   opacity: 0;
@@ -568,7 +660,7 @@ svg {
 
 .pole-silhouette {
   position: absolute;
-  right: clamp(128px, 24vw, 410px);
+  right: clamp(142px, 24.6vw, 430px);
   bottom: 0;
   width: clamp(13px, 1.1vw, 18px);
   height: clamp(360px, 58vh, 620px);
@@ -594,12 +686,12 @@ svg {
 }
 
 .shinobi-silhouette {
-  --figure-x: clamp(107px, 24vw, 390px);
+  --figure-x: clamp(126px, 24.8vw, 410px);
   position: absolute;
-  right: calc(var(--figure-x) - 46px);
-  bottom: clamp(354px, 58vh, 612px);
-  width: 112px;
-  height: 196px;
+  right: calc(var(--figure-x) - 66px);
+  bottom: clamp(350px, 57.6vh, 612px);
+  width: clamp(118px, 8.8vw, 150px);
+  height: auto;
   opacity: 0;
   transform-origin: 50% 95%;
   transform: translate3d(0, -52vh, 0) scale(0.92);
@@ -608,11 +700,55 @@ svg {
     shinobi-settle 720ms 1510ms var(--ease) forwards;
 }
 
-.shinobi-silhouette span {
-  position: absolute;
-  display: block;
-  background: #010102;
-  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.42));
+.itachi-silhouette {
+  overflow: visible;
+  filter:
+    drop-shadow(0 20px 20px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 16px rgba(211, 26, 42, 0.09));
+}
+
+.itachi-silhouette path {
+  fill: #010102;
+  stroke: rgba(255, 255, 255, 0.035);
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+.itachi-silhouette .itachi-head,
+.itachi-silhouette .itachi-headband {
+  fill: #030304;
+}
+
+.itachi-silhouette .akatsuki-collar {
+  fill: #000;
+  stroke: rgba(240, 240, 242, 0.055);
+}
+
+.itachi-silhouette .itachi-cloak {
+  fill: #020203;
+}
+
+.itachi-silhouette .itachi-cloak-slit {
+  fill: rgba(0, 0, 0, 0.72);
+  stroke: rgba(176, 19, 34, 0.12);
+}
+
+.itachi-silhouette .itachi-shadow {
+  fill: rgba(0, 0, 0, 0.56);
+  stroke: 0;
+}
+
+.itachi-silhouette .itachi-ponytail,
+.itachi-silhouette .itachi-hair-back {
+  transform-origin: 74px 44px;
+  animation: hair-aftershock 1200ms 1350ms var(--ease) forwards;
+}
+
+.itachi-silhouette .itachi-cloak,
+.itachi-silhouette .itachi-left-sleeve,
+.itachi-silhouette .itachi-right-sleeve {
+  transform-origin: 75px 84px;
+  animation: cloak-aftershock 1250ms 1340ms var(--ease) forwards;
 }
 
 .shinobi-head {
@@ -715,22 +851,11 @@ svg {
 }
 
 .crimson-eye {
-  top: 34px;
-  width: 6px;
-  height: 3px;
-  border-radius: 50%;
-  background: #e01b2d;
+  fill: #e01b2d;
   opacity: 0;
-  box-shadow: 0 0 9px rgba(224, 27, 45, 0.9);
+  filter: drop-shadow(0 0 4px rgba(224, 27, 45, 0.95));
+  transform-origin: center;
   animation: eye-flash 560ms 1980ms var(--ease) forwards;
-}
-
-.crimson-eye-left {
-  left: 49px;
-}
-
-.crimson-eye-right {
-  left: 61px;
 }
 
 .hero-grid {
@@ -882,102 +1007,100 @@ svg {
   aspect-ratio: 1;
   opacity: 0.72;
   border-radius: 50%;
+  overflow: visible;
 }
 
 .hero-eye {
   position: absolute;
-  right: clamp(42px, 8vw, 162px);
-  bottom: clamp(62px, 11vh, 138px);
-  width: clamp(170px, 18vw, 310px);
+  right: clamp(122px, 15.5vw, 286px);
+  top: clamp(188px, 25vh, 286px);
+  width: clamp(116px, 11.5vw, 174px);
   opacity: 0;
   transform: scale(0.7);
   animation: mangekyo-awaken 920ms 1900ms var(--ease) forwards;
+  mix-blend-mode: normal;
+  filter:
+    drop-shadow(0 0 24px rgba(211, 26, 42, 0.22))
+    drop-shadow(0 0 70px rgba(176, 19, 34, 0.16));
 }
 
 .hero-cinematic.is-activated .hero-eye {
-  opacity: 0.82;
+  opacity: 0.34;
 }
 
 .system-eye {
   position: absolute;
   inset: 4% 0 auto auto;
-  opacity: 0.46;
+  opacity: 0.2;
   filter: drop-shadow(0 0 50px rgba(176, 19, 34, 0.08));
 }
 
 .eye-iris,
 .eye-ring,
-.tomoe-blade,
+.eye-noise,
+.mangekyo-hook,
 .eye-pupil {
-  position: absolute;
-  border-radius: 50%;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .eye-iris {
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 50%, #050506 0 9%, transparent 10%),
-    radial-gradient(circle, rgba(211, 26, 42, 0.62) 0 37%, rgba(112, 9, 17, 0.44) 56%, rgba(0, 0, 0, 0.82) 72%),
-    conic-gradient(from 8deg, rgba(255, 255, 255, 0.03), rgba(211, 26, 42, 0.1), transparent, rgba(211, 26, 42, 0.08), rgba(255, 255, 255, 0.02));
-  box-shadow:
-    inset 0 0 42px rgba(0, 0, 0, 0.78),
-    inset 0 0 5px rgba(255, 255, 255, 0.08),
-    0 0 74px rgba(176, 19, 34, 0.13);
+  fill: url("#mangekyoIris");
+  filter: drop-shadow(0 0 16px rgba(176, 19, 34, 0.18));
 }
 
-.eye-iris::before {
-  content: "";
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-  opacity: 0.12;
+.eye-noise {
+  fill: rgba(255, 255, 255, 0.08);
+  filter: url("#mangekyoGrain");
   mix-blend-mode: screen;
+  opacity: 0.32;
 }
 
 .eye-ring-outer {
-  inset: 7%;
-  border: 2px solid rgba(0, 0, 0, 0.72);
-  box-shadow: 0 0 0 1px rgba(211, 26, 42, 0.18);
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.78);
+  stroke-width: 10;
+  paint-order: stroke;
 }
 
 .eye-ring-inner {
-  inset: 36%;
-  border: 2px solid rgba(0, 0, 0, 0.86);
-  background: radial-gradient(circle, #010102 0 38%, transparent 40%);
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.9);
+  stroke-width: 8;
 }
 
-.tomoe-blade {
-  top: 10%;
-  left: 39%;
-  width: 22%;
-  height: 48%;
-  background: #020203;
-  border-radius: 55% 55% 58% 58% / 42% 42% 72% 72%;
-  clip-path: path("M 50 0 C 88 20 92 62 56 100 C 48 78 30 68 4 68 C 24 49 34 28 50 0 Z");
-  transform-origin: 50% 84%;
-  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+.mangekyo-hooks {
+  transform-origin: 120px 120px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
 }
 
-.tomoe-blade-one {
+.mangekyo-hook {
+  fill: #020203;
+  stroke: rgba(0, 0, 0, 0.82);
+  stroke-width: 1;
+}
+
+.mangekyo-hook-one {
   transform: rotate(0deg);
 }
 
-.tomoe-blade-two {
+.mangekyo-hook-two {
   transform: rotate(120deg);
 }
 
-.tomoe-blade-three {
+.mangekyo-hook-three {
   transform: rotate(240deg);
 }
 
 .eye-pupil {
-  inset: 43%;
-  background: #020203;
-  border: 1px solid rgba(211, 26, 42, 0.22);
-  box-shadow:
-    0 0 16px rgba(0, 0, 0, 0.9),
-    0 0 28px rgba(211, 26, 42, 0.28);
+  fill: #010102;
+  stroke: rgba(211, 26, 42, 0.18);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.95));
+}
+
+.eye-pupil-cut {
+  fill: #060607;
 }
 
 .terminal-card {
@@ -1834,15 +1957,37 @@ svg {
 @keyframes mangekyo-awaken {
   0% {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.76) rotate(-2deg);
   }
   42% {
-    opacity: 0.72;
+    opacity: 0.78;
     filter: blur(0);
   }
   100% {
-    opacity: 0.34;
-    transform: scale(1);
+    opacity: 0.28;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes shuriken-click {
+  0% {
+    width: 25px;
+    height: 25px;
+  }
+  55% {
+    width: 19px;
+    height: 19px;
+  }
+  100% {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@keyframes cursor-pulse {
+  to {
+    opacity: 0;
+    transform: scale(1.8);
   }
 }
 
@@ -2026,12 +2171,19 @@ svg {
   }
 
   .shinobi-silhouette {
-    right: 11px;
-    bottom: 46vh;
+    right: 2px;
+    bottom: 49vh;
+    width: 96px;
     transform: translate3d(0, -32vh, 0) scale(0.76);
     animation:
       shinobi-drop 760ms 420ms var(--drop) forwards,
       shinobi-settle 520ms 1210ms var(--ease) forwards;
+  }
+
+  .hero-eye {
+    top: 276px;
+    right: 38px;
+    width: 92px;
   }
 
   .hero-crow {
@@ -2108,7 +2260,8 @@ svg {
   .hero-crow,
   .section-crow,
   .contact-crow,
-  .dialog-crow {
+  .dialog-crow,
+  .shuriken-cursor {
     display: none;
   }
 }

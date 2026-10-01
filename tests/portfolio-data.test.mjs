@@ -103,9 +103,14 @@ test("SPA renders the cinematic art-direction hooks without the portrait", () =>
 
   assert.match(appSource, /class="hero-cinematic"/);
   assert.match(appSource, /class="eclipse-moon"/);
-  assert.match(appSource, /class="shinobi-silhouette"/);
+  assert.match(appSource, /class="shinobi-silhouette/);
+  assert.match(appSource, /itachi-silhouette/);
+  assert.match(appSource, /class="akatsuki-collar"/);
   assert.match(appSource, /class="crow-swarm"/);
   assert.match(appSource, /class="mangekyo-eye /);
+  assert.match(appSource, /class="mangekyo-hook/);
+  assert.match(appSource, /class="shuriken-cursor"/);
+  assert.match(appSource, /setupShurikenCursor/);
   assert.match(appSource, /resume\.path/);
   assert.match(appSource, /View CV/);
   assert.match(appSource, /id="writing"/);

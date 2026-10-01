@@ -101,15 +101,56 @@ function crowMarkup(count, prefix = "crow") {
 
 function renderMangekyoEye(extraClass = "") {
   return `
-    <div class="mangekyo-eye ${extraClass}" aria-hidden="true">
-      <span class="eye-iris"></span>
-      <span class="eye-ring eye-ring-outer"></span>
-      <span class="eye-ring eye-ring-inner"></span>
-      <span class="tomoe-blade tomoe-blade-one"></span>
-      <span class="tomoe-blade tomoe-blade-two"></span>
-      <span class="tomoe-blade tomoe-blade-three"></span>
-      <span class="eye-pupil"></span>
-    </div>`;
+    <svg class="mangekyo-eye ${extraClass}" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="mangekyoIris" cx="48%" cy="44%" r="58%">
+          <stop offset="0%" stop-color="#d21a2b" stop-opacity=".92"/>
+          <stop offset="46%" stop-color="#95111c" stop-opacity=".78"/>
+          <stop offset="72%" stop-color="#240407" stop-opacity=".92"/>
+          <stop offset="100%" stop-color="#050506" stop-opacity="1"/>
+        </radialGradient>
+        <filter id="mangekyoGrain">
+          <feTurbulence type="fractalNoise" baseFrequency=".92" numOctaves="2" seed="7"/>
+          <feColorMatrix type="saturate" values="0"/>
+          <feComponentTransfer>
+            <feFuncA type="table" tableValues="0 .18"/>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+      <circle class="eye-iris" cx="120" cy="120" r="104"/>
+      <circle class="eye-ring eye-ring-outer" cx="120" cy="120" r="94"/>
+      <circle class="eye-ring eye-ring-inner" cx="120" cy="120" r="34"/>
+      <circle class="eye-noise" cx="120" cy="120" r="93"/>
+      <g class="mangekyo-hooks">
+        <path class="mangekyo-hook mangekyo-hook-one" d="M120 30 C149 53 161 80 152 109 C145 132 128 145 105 150 C126 130 125 108 109 91 C96 78 92 58 120 30Z"/>
+        <path class="mangekyo-hook mangekyo-hook-two" d="M120 30 C149 53 161 80 152 109 C145 132 128 145 105 150 C126 130 125 108 109 91 C96 78 92 58 120 30Z"/>
+        <path class="mangekyo-hook mangekyo-hook-three" d="M120 30 C149 53 161 80 152 109 C145 132 128 145 105 150 C126 130 125 108 109 91 C96 78 92 58 120 30Z"/>
+      </g>
+      <circle class="eye-pupil" cx="120" cy="120" r="24"/>
+      <circle class="eye-pupil-cut" cx="120" cy="120" r="10"/>
+    </svg>`;
+}
+
+function renderItachiSilhouette() {
+  return `
+    <svg class="shinobi-silhouette itachi-silhouette" data-shinobi viewBox="0 0 150 260" aria-hidden="true" focusable="false">
+      <path class="itachi-shadow" d="M35 238 C53 224 96 224 118 238 L126 252 L28 252Z"/>
+      <path class="itachi-ponytail" d="M82 30 C105 43 111 76 101 105 C96 87 88 75 76 66 C67 58 68 40 82 30Z"/>
+      <path class="itachi-hair-back" d="M60 20 C39 36 36 75 46 103 C54 89 62 80 74 72 C87 62 82 33 60 20Z"/>
+      <path class="itachi-head" d="M55 29 C61 18 78 18 86 29 C94 42 89 60 76 66 C62 64 52 45 55 29Z"/>
+      <path class="itachi-headband" d="M52 38 C61 34 78 33 89 38 L88 44 C75 41 63 41 53 45Z"/>
+      <path class="akatsuki-collar" d="M35 92 C39 61 55 53 73 77 C91 52 108 62 114 92 C101 84 90 88 78 103 C66 88 50 83 35 92Z"/>
+      <path class="itachi-cloak" d="M39 84 C45 72 57 68 73 76 C89 69 103 73 110 85 C124 130 127 188 119 236 C99 225 88 204 75 174 C61 205 48 226 28 237 C20 188 24 128 39 84Z"/>
+      <path class="itachi-left-sleeve" d="M38 96 C22 125 17 154 21 188 C34 181 42 165 45 139 C48 119 48 105 38 96Z"/>
+      <path class="itachi-right-sleeve" d="M109 96 C126 124 133 153 129 185 C114 181 105 164 102 139 C99 118 99 105 109 96Z"/>
+      <path class="itachi-cloak-slit" d="M75 102 C82 137 83 180 75 232 C67 181 68 137 75 102Z"/>
+      <path class="itachi-left-leg" d="M62 220 C56 232 50 240 39 246 C36 242 37 236 45 230 C51 225 55 219 59 210Z"/>
+      <path class="itachi-right-leg" d="M88 220 C95 232 102 240 113 246 C116 242 114 236 106 230 C99 225 96 219 91 210Z"/>
+      <path class="itachi-left-foot" d="M32 246 C42 240 52 240 61 248 C52 253 41 254 31 251Z"/>
+      <path class="itachi-right-foot" d="M90 248 C100 240 112 241 122 247 C112 253 100 254 90 248Z"/>
+      <circle class="crimson-eye crimson-eye-left" cx="66" cy="46" r="1.8"/>
+      <circle class="crimson-eye crimson-eye-right" cx="80" cy="46" r="1.8"/>
+    </svg>`;
 }
 
 function renderHeader() {
@@ -162,19 +203,7 @@ function renderHero() {
         <div class="moon-haze"></div>
         <div class="roofline"></div>
         <div class="pole-silhouette"></div>
-        <div class="shinobi-silhouette" data-shinobi>
-          <span class="shinobi-head"></span>
-          <span class="shinobi-hair"></span>
-          <span class="shinobi-collar"></span>
-          <span class="shinobi-torso"></span>
-          <span class="shinobi-cloak"></span>
-          <span class="shinobi-arm shinobi-arm-left"></span>
-          <span class="shinobi-arm shinobi-arm-right"></span>
-          <span class="shinobi-leg shinobi-leg-left"></span>
-          <span class="shinobi-leg shinobi-leg-right"></span>
-          <span class="crimson-eye crimson-eye-left"></span>
-          <span class="crimson-eye crimson-eye-right"></span>
-        </div>
+        ${renderItachiSilhouette()}
         <div class="crow-swarm" data-crow-swarm>${crowMarkup(24, "hero-crow")}</div>
         ${renderMangekyoEye("hero-eye")}
       </div>
@@ -193,7 +222,6 @@ function renderHero() {
           <div class="social-rail" aria-label="Social links">${socialLinks()}</div>
         </div>
         <div class="hero-system" data-reveal>
-          ${renderMangekyoEye("system-eye")}
           <div class="terminal-card">
             <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
             <p class="code-line">&gt; identity</p>
@@ -473,6 +501,13 @@ function renderApp() {
       </main>
       ${renderFooter()}
       ${renderDialog()}
+      <div class="shuriken-cursor" data-shuriken-cursor aria-hidden="true">
+        <svg viewBox="0 0 32 32" focusable="false">
+          <path class="shuriken-blade" d="M16 2 L20 12 L30 8 L22 16 L30 24 L20 20 L16 30 L12 20 L2 24 L10 16 L2 8 L12 12Z"/>
+          <circle class="shuriken-core" cx="16" cy="16" r="4"/>
+          <circle class="shuriken-hole" cx="16" cy="16" r="1.7"/>
+        </svg>
+      </div>
     </div>`;
 }
 
@@ -774,6 +809,80 @@ function setupPointerEffects() {
   });
 }
 
+function setupShurikenCursor() {
+  const cursor = document.querySelector("[data-shuriken-cursor]");
+  const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!cursor || prefersReducedMotion.matches || !supportsFinePointer) return;
+
+  let currentX = -80;
+  let currentY = -80;
+  let targetX = -80;
+  let targetY = -80;
+  let rotation = 0;
+  let moving = false;
+  let frame = 0;
+  const interactiveSelector = "a, button, summary, input, textarea, select, [role='button'], [data-tilt]";
+
+  document.documentElement.classList.add("has-shuriken-cursor");
+  cursor.classList.add("is-ready");
+
+  function animate() {
+    currentX += (targetX - currentX) * 0.45;
+    currentY += (targetY - currentY) * 0.45;
+    if (moving) rotation += 2.2;
+    cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotation}deg)`;
+    frame = window.requestAnimationFrame(animate);
+  }
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      moving = true;
+      cursor.classList.add("is-moving");
+      window.clearTimeout(cursor._moveTimer);
+      cursor._moveTimer = window.setTimeout(() => {
+        moving = false;
+        cursor.classList.remove("is-moving");
+      }, 90);
+    },
+    { passive: true },
+  );
+
+  document.addEventListener("pointerover", (event) => {
+    if (event.target.closest(interactiveSelector)) cursor.classList.add("is-hovering");
+    if (event.target.closest(".hero-cinematic, .hero-system")) cursor.classList.add("is-mangekyo");
+  });
+
+  document.addEventListener("pointerout", (event) => {
+    if (event.target.closest(interactiveSelector)) cursor.classList.remove("is-hovering");
+    if (event.target.closest(".hero-cinematic, .hero-system")) cursor.classList.remove("is-mangekyo");
+  });
+
+  document.addEventListener("pointerdown", () => {
+    cursor.classList.remove("is-clicking");
+    void cursor.offsetWidth;
+    rotation += 120;
+    cursor.classList.add("is-clicking");
+  });
+
+  document.addEventListener("pointerup", () => {
+    window.setTimeout(() => cursor.classList.remove("is-clicking"), 180);
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+      return;
+    }
+    if (!frame) animate();
+  });
+
+  animate();
+}
+
 function setupTilt() {
   if (prefersReducedMotion.matches) return;
   const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -805,5 +914,6 @@ setupDetailRoutes();
 setupSectionHashScrolling();
 setupIllusionMoments();
 setupPointerEffects();
+setupShurikenCursor();
 setupTilt();
 hideLoader();
